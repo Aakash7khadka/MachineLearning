@@ -1,0 +1,82 @@
+import numpy as np
+#classification variable for male and female
+gender=['male','male','male','male','female','female','female','female']
+
+
+#features for likelilood in posteriro probability
+height=np.array([6,5.92,5.58,5.92,5,5.5,5.42,5.75])
+weight=np.array([180,190,170,165,100,150,130,150])
+footsize=np.array([12,11,12,10,6,8,7,9])
+
+count_m=0
+count_f=0
+male_height=np.array([])
+male_weight=np.array([])
+male_foot=np.array([])
+female_height=np.array([])
+female_weight=np.array([])
+female_foot=np.array([])
+i=0
+for gen in gender:
+     if ('male'==gen):
+            male_height= np.append( male_height,height[i])
+            male_weight= np.append( male_weight,weight[i])
+            male_foot= np.append( male_foot,footsize[i])
+            count_m+=1
+     else:
+            female_height= np.append( female_height,height[i])
+            female_weight= np.append( female_weight,weight[i])
+            female_foot= np.append( female_foot,footsize[i])
+            count_f+=1
+     i=i+1
+total=count_m+count_f
+p_male=count_m/total
+p_female=count_f/total
+
+
+#mean attribute of male
+male_height_mean=np.mean(male_height)
+male_weight_mean=np.mean(male_weight)
+male_foot_mean=np.mean(male_foot)
+
+
+#mean attribute for female
+female_height_mean=np.mean(female_height)
+female_weight_mean=np.mean(female_weight)
+female_foot_mean=np.mean(female_foot)
+
+#variance attribute of male
+male_height_var=np.var(male_height)
+male_weight_var=np.var(male_weight)
+male_foot_var=np.var(male_foot)
+
+#variance attribute of female
+female_height_var=np.var(female_height)
+female_weight_var=np.var(female_weight)
+female_foot_var=np.var(female_foot)
+print(np.exp(np.exp((-(6-male_height_mean)**2)/(2*male_height_var))))
+print(1/(np.sqrt(2*np.pi*male_height_var)) * np.exp((-(6-male_height_mean)**2)/(2*male_height_var)))
+
+
+def p_x_given_y(x, mean_y, variance_y):
+    
+    # Input the arguments into a probability density function
+    #p = 1/(np.sqrt(2*np.pi*variance_y)) * np.exp((-(x-mean_y)**2)/(2*variance_y))
+    
+    p = 1/(np.sqrt(2*np.pi*variance_y)) * np.exp((-(x-mean_y)**2)/(2*variance_y))
+    print(p)
+    # return p
+    return p
+
+
+h=int(input('Enter your height'))
+w=int(input('Enter your weight'))
+f=int(input('Enter your footsize'))
+#check_male=p(height|male)*p(weight|male)*p(footsize|male)*male
+check_male=p_x_given_y(h,male_height_mean,male_height_var)*p_x_given_y(w,male_weight_mean,male_weight_var)*p_x_given_y(f,male_foot_mean,male_foot_var)*p_male
+check_female=p_x_given_y(h,female_height_mean,female_height_var)*p_x_given_y(w,female_weight_mean,female_weight_var)*p_x_given_y(f,female_foot_mean,female_foot_var)*p_male
+if(check_male>check_female):
+    print('Male')
+else:
+    print('Female')
+#p_x_given_y(h,female_height_mean,female_height_va
