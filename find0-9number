@@ -1,0 +1,54 @@
+import random
+import numpy as np
+#n1=17
+#n2=4
+i=0
+while True:
+    n1=random.randint(10,99)
+    n2=random.randint(1,9)
+    print(n1,n2)
+    
+    s2=n1%10
+    s1=n1//10
+    #print(s1,s2,n1)
+    n=[]
+    if (s1 != n2 != s2):
+        n.append(s1)
+        n.append(s2)
+        n.append(n2)
+        print(n1,n2)
+        #print('n',n)
+        prod1=n1*n2
+        print(prod1)
+        
+        if(prod1>9 and prod1<100):
+            s3=prod1%10
+            s4=prod1//10
+            if(s3!=s4 and (s3 not in n) and (s4 not in n) and (s3!=0 and s4!=0)):
+                
+                n.append(s4)
+                n.append(s3)
+                #print('nn',n)
+                nn=random.randint(10,99)
+                n3=nn%10
+                n4=nn//10
+                print('test',n3,n4)
+                
+                if(n3!=n4 and(n3 not in n) and (n4 not in n) and (n3!=0) and (n4!=0)):
+                    n.append(n4)
+                    n.append(n3)
+                    print('sec',n)
+                    summ=nn+prod1
+                    if(summ>9 and summ<99):
+                        n6=summ%10
+                        n5=summ//10
+                        print('tt',n6,n5)
+                       
+                        if(n5!=n6 and n5 not in n and n6 not in n and (n5!=0) and (n6!=0)):
+                            n.append(n5) 
+                            n.append(n6)
+                            print('n',n)
+                            if(len(n)==9):
+                                 break
+    i+=1
+print(n,i)
